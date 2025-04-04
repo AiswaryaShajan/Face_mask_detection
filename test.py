@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 from keras.models import load_model
-model=load_model("./model-010.h5")
+model=load_model("final_model.keras")
 
 results={0:'without mask',1:'mask'}
 GR_dict={0:(0,0,255),1:(0,255,0)}
@@ -10,7 +10,7 @@ rect_size = 4
 cap = cv2.VideoCapture(0) 
 
 
-haarcascade = cv2.CascadeClassifier('/home/user_name/.local/lib/python3.6/site-packages/cv2/data/haarcascade_frontalface_default.xml')
+haarcascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
 while True:
     (rval, im) = cap.read()
@@ -45,3 +45,4 @@ while True:
 cap.release()
 
 cv2.destroyAllWindows()
+
