@@ -38,12 +38,12 @@ pip3 install opencv-python tensorflow numpy
 ``` 
 ### 3. Run the Detector
 ```bash
-python3 .\face_mask_model.py
+python3 .\mask_webcam_test.py
 ```
-`Press Q to exit the webcam window.`
+`Press ESC to exit the webcam window.`
 
 ### 🖼️ Demo Screenshot
-<img src="output_ss/with_mask_ss.png" alt="Face Mask Detection" width="400">
+![Face Mask Output](screenshots/successful_detection.png)
 
 ### If training the model from scratch:
 
@@ -116,13 +116,14 @@ history = model.fit_generator(train_generator,
                               validation_data=validation_generator,
                               callbacks=[checkpoint])
 ```
+`Save the model as final_model.keras.`
 
-### 8. Make a script called test.py and copy the following:
+### 8. Make a script called mask_webcam_test.py and copy the following:
 ```bash 
 import cv2
 import numpy as np
 from keras.models import load_model
-model=load_model("./model-010.h5")
+model=load_model("final_model.keras")
 
 results={0:'without mask',1:'mask'}
 GR_dict={0:(0,0,255),1:(0,255,0)}
@@ -131,7 +132,7 @@ rect_size = 4
 cap = cv2.VideoCapture(0) 
 
 
-haarcascade = cv2.CascadeClassifier('/home/user_name/.local/lib/python3.6/site-packages/cv2/data/haarcascade_frontalface_default.xml')
+haarcascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
 while True:
     (rval, im) = cap.read()
